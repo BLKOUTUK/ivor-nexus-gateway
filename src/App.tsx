@@ -1,9 +1,15 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import MainLayout from "./components/layout/MainLayout";
+import Home from "./pages/Home";
+import Resources from "./pages/Resources";
+import Events from "./pages/Events";
+import Community from "./pages/Community";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -15,8 +21,46 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route 
+            path="/" 
+            element={
+              <MainLayout>
+                <Home />
+              </MainLayout>
+            } 
+          />
+          <Route 
+            path="/resources" 
+            element={
+              <MainLayout>
+                <Resources />
+              </MainLayout>
+            } 
+          />
+          <Route 
+            path="/events" 
+            element={
+              <MainLayout>
+                <Events />
+              </MainLayout>
+            } 
+          />
+          <Route 
+            path="/community" 
+            element={
+              <MainLayout>
+                <Community />
+              </MainLayout>
+            } 
+          />
+          <Route 
+            path="/about" 
+            element={
+              <MainLayout>
+                <About />
+              </MainLayout>
+            } 
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
