@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Globe, Heart, Book } from 'lucide-react';
+import { Globe, Heart, Book, Film } from 'lucide-react';
 
 const About: React.FC = () => {
   return (
@@ -29,6 +29,35 @@ const About: React.FC = () => {
         <p className="text-white/80 mb-6">
           IVOR (Informed Voice Of Resources) is inspired by Cummings' legacy of connecting people to resources and building community networks. Our platform aims to continue this tradition in the digital age, providing a space where wisdom, resources, and community support can be accessed by all.
         </p>
+        
+        <div className="glass-card p-6 mb-8">
+          <h3 className="text-xl font-bold mb-4 flex items-center">
+            <Film className="mr-2 text-ivor-amber" />
+            Ivor Cummings Film
+          </h3>
+          <div className="aspect-video rounded-lg overflow-hidden mb-4 backdrop-blur-sm bg-black/40">
+            <div className="flex items-center justify-center h-full relative">
+              <img 
+                src="/lovable-uploads/45a36ec6-0396-4808-8391-aead803acb68.png"
+                alt="Ivor Berto Pearl & Justin Film" 
+                className="w-40 h-40 rounded-full absolute" 
+              />
+              <div className="text-white/90 mt-48 text-center">
+                <p className="font-bold">Ivor Berto Pearl & Justin</p>
+                <p className="text-sm text-white/70">A documentary on the legacy of Ivor Cummings</p>
+              </div>
+            </div>
+          </div>
+          <p className="text-white/80 mb-4">
+            This documentary explores the life and impact of Ivor Cummings, highlighting his contributions to community building and social justice. Through archival footage and interviews with those who knew him, the film offers a glimpse into Cummings' world and the lasting influence of his work.
+          </p>
+          <div className="flex justify-center">
+            <button className="glass-button flex items-center">
+              <Film size={16} className="mr-2" />
+              Watch Documentary
+            </button>
+          </div>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <div className="glass-card p-4 text-center">

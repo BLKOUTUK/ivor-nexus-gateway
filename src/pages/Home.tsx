@@ -61,9 +61,16 @@ const Home: React.FC = () => {
         <div className="glass-card p-6 mb-8 animate-fade-in">
           <div className="flex flex-col md:flex-row items-center">
             <div className="w-full md:w-1/2 mb-6 md:mb-0">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Welcome to <span className="bg-gradient-to-r from-ivor-teal to-ivor-amber text-transparent bg-clip-text">IVOR</span>
-              </h1>
+              <div className="flex items-center mb-6">
+                <img 
+                  src="/lovable-uploads/b6d0c34e-5be3-45c0-a630-79db1ca97500.png" 
+                  alt="BLKOUT Logo" 
+                  className="w-16 h-16 mr-3"
+                />
+                <h1 className="text-4xl md:text-5xl font-bold">
+                  <span className="bg-gradient-to-r from-ivor-teal to-ivor-amber text-transparent bg-clip-text">IVOR</span>
+                </h1>
+              </div>
               <p className="text-xl text-white/80 mb-6">
                 Your guide to community wisdom and resources
               </p>
