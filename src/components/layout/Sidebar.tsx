@@ -1,75 +1,108 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Calendar, MessageCircle, Book, Users, Info } from 'lucide-react';
-
-interface NavItemProps {
-  to: string;
-  icon: React.ReactNode;
-  label: string;
-  isActive: boolean;
-}
-
-const NavItem: React.FC<NavItemProps> = ({ to, icon, label, isActive }) => {
-  return (
-    <Link to={to} className={`nav-item ${isActive ? 'nav-item-active' : ''}`}>
-      <div className="mb-1">{icon}</div>
-      <span className="text-sm">{label}</span>
-    </Link>
-  );
-};
+import { useAuth } from '@/contexts/AuthContext';
+import { 
+  Home, 
+  BookOpen, 
+  Calendar, 
+  Users, 
+  Info, 
+  LogOut, 
+  LogIn
+} from 'lucide-react';
 
 const Sidebar: React.FC = () => {
   const location = useLocation();
-  const currentPath = location.pathname;
+  const { user, signOut } = useAuth();
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="hidden md:flex glass-card w-72 h-screen flex-col p-6 fixed left-0 top-0 animate-slide-in">
-      <div className="flex items-center mb-12">
-        <h1 className="text-3xl font-bold text-white bg-gradient-to-r from-ivor-teal to-ivor-amber text-transparent bg-clip-text">
-          IVOR
+    <aside className="hidden md:flex flex-col fixed left-0 top-0 bottom-0 w-72 bg-black/30 backdrop-blur-md p-6">
+      <div className="flex items-center mb-10">
+        <div className="w-12 h-12 mr-3 rounded-full overflow-hidden flex items-center justify-center">
+          <img 
+            src="/lovable-uploads/b6d0c34e-5be3-45c0-a630-79db1ca97500.png" 
+            alt="BLKOUT Logo" 
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <h1 className="text-2xl font-bold">
+          <span className="bg-gradient-to-r from-ivor-teal to-ivor-amber text-transparent bg-clip-text">IVOR</span>
         </h1>
       </div>
-      
-      <div className="flex flex-col space-y-2">
-        <NavItem 
-          to="/" 
-          icon={<MessageCircle size={24} />} 
-          label="Conversation" 
-          isActive={currentPath === '/'} 
-        />
-        <NavItem 
-          to="/resources" 
-          icon={<Book size={24} />} 
-          label="Resources" 
-          isActive={currentPath === '/resources'} 
-        />
-        <NavItem 
-          to="/events" 
-          icon={<Calendar size={24} />} 
-          label="Events" 
-          isActive={currentPath === '/events'} 
-        />
-        <NavItem 
-          to="/community" 
-          icon={<Users size={24} />} 
-          label="Community" 
-          isActive={currentPath === '/community'} 
-        />
-        <NavItem 
-          to="/about" 
-          icon={<Info size={24} />} 
-          label="About" 
-          isActive={currentPath === '/about'} 
-        />
+
+      <nav className="flex-grow">
+        <ul className="space-y-2">
+          <li>
+            <Link 
+              to="/" 
+              className={`sidebar-link ${isActive('/') ? 'active' : ''}`}
+            >
+              <Home size={20} />
+              <span>Home</span>
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/resources" 
+              className={`sidebar-link ${isActive('/resources') ? 'active' : ''}`}
+            >
+              <BookOpen size={20} />
+              <span>Resources</span>
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/events" 
+              className={`sidebar-link ${isActive('/events') ? 'active' : ''}`}
+            >
+              <Calendar size={20} />
+              <span>Events</span>
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/community" 
+              className={`sidebar-link ${isActive('/community') ? 'active' : ''}`}
+            >
+              <Users size={20} />
+              <span>Community</span>
+            </Link>
+          </li>
+          <li>
+            <Link 
+              to="/about" 
+              className={`sidebar-link ${isActive('/about') ? 'active' : ''}`}
+            >
+              <Info size={20} />
+              <span>About</span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      <div className="mt-auto pt-4 border-t border-white/10">
+        {user ? (
+          <button 
+            onClick={() => signOut()} 
+            className="sidebar-link w-full justify-start"
+          >
+            <LogOut size={20} />
+            <span>Sign Out</span>
+          </button>
+        ) : (
+          <Link 
+            to="/auth" 
+            className="sidebar-link"
+          >
+            <LogIn size={20} />
+            <span>Sign In</span>
+          </Link>
+        )}
       </div>
-      
-      <div className="mt-auto">
-        <div className="glass-card p-4 text-sm text-white/70">
-          <p>IVOR - Connecting the community with wisdom and resources</p>
-        </div>
-      </div>
-    </div>
+    </aside>
   );
 };
 

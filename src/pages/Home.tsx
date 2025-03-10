@@ -1,6 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Send, Mic, User } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { saveConversation } from '@/utils/supabaseClient';
+import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface Message {
   id: number;
@@ -20,8 +24,25 @@ const Home: React.FC = () => {
   ]);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
-  const handleSendMessage = () => {
+  // Scroll to bottom whenever messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  // Check authentication
+  useEffect(() => {
+    if (!user) {
+      // Uncomment for production to enforce login
+      // navigate('/auth');
+    }
+  }, [user, navigate]);
+
+  const handleSendMessage = async () => {
     if (inputText.trim() === '') return;
 
     const newMessage: Message = {
@@ -35,17 +56,36 @@ const Home: React.FC = () => {
     setInputText('');
     setIsTyping(true);
 
-    // Simulate IVOR response
-    setTimeout(() => {
-      const response: Message = {
-        id: messages.length + 2,
-        text: "I'm here to help you connect with resources and information for the Black queer community. You can ask me about events, community resources, or historical information.",
-        sender: 'ivor',
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, response]);
+    try {
+      // In a production app, this would call an AI service
+      // For now, we'll use a simple response
+      const responseText = "I'm here to help you connect with resources and information for the Black queer community. You can ask me about events, community resources, or historical information.";
+      
+      // Save to Supabase if user is logged in
+      if (user) {
+        await saveConversation(inputText, responseText);
+      }
+
+      // Simulate delay for typing effect
+      setTimeout(() => {
+        const response: Message = {
+          id: messages.length + 2,
+          text: responseText,
+          sender: 'ivor',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, response]);
+        setIsTyping(false);
+      }, 2000);
+    } catch (error) {
+      console.error('Error saving conversation:', error);
       setIsTyping(false);
-    }, 2000);
+      toast({
+        title: 'Error',
+        description: 'Failed to save conversation',
+        variant: 'destructive'
+      });
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -110,6 +150,7 @@ const Home: React.FC = () => {
               <div className="w-2 h-2 bg-white rounded-full animate-pulse delay-200"></div>
             </div>
           )}
+          <div ref={messagesEndRef} />
         </div>
         
         <div className="flex gap-2">
