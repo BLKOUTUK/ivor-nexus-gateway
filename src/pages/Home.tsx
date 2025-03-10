@@ -62,11 +62,13 @@ const Home: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center">
             <div className="w-full md:w-1/2 mb-6 md:mb-0">
               <div className="flex items-center mb-6">
-                <img 
-                  src="/lovable-uploads/b6d0c34e-5be3-45c0-a630-79db1ca97500.png" 
-                  alt="BLKOUT Logo" 
-                  className="w-16 h-16 mr-3"
-                />
+                <div className="w-16 h-16 mr-3 rounded-full overflow-hidden flex items-center justify-center">
+                  <img 
+                    src="/lovable-uploads/b6d0c34e-5be3-45c0-a630-79db1ca97500.png" 
+                    alt="BLKOUT Logo" 
+                    className="w-full h-full object-contain"
+                  />
+                </div>
                 <h1 className="text-4xl md:text-5xl font-bold">
                   <span className="bg-gradient-to-r from-ivor-teal to-ivor-amber text-transparent bg-clip-text">IVOR</span>
                 </h1>
@@ -79,12 +81,11 @@ const Home: React.FC = () => {
               </p>
             </div>
             <div className="w-full md:w-1/2 flex justify-center">
-              <div className="relative w-48 h-48 rounded-full bg-gradient-to-br from-ivor-teal/30 to-ivor-amber/30 backdrop-blur-sm flex items-center justify-center animate-float">
-                <div className="absolute inset-0 rounded-full bg-black/20 backdrop-blur-sm"></div>
+              <div className="relative w-48 h-48 rounded-full overflow-hidden flex items-center justify-center animate-float">
                 <img 
                   src="/lovable-uploads/c4fc13e6-ca79-4b24-99b4-186bb5f7d82f.png" 
                   alt="IVOR Assistant" 
-                  className="w-48 h-48 rounded-full relative z-10"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>
