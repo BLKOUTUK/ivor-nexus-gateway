@@ -81,7 +81,11 @@ const Home: React.FC = () => {
             <div className="w-full md:w-1/2 flex justify-center">
               <div className="relative w-48 h-48 rounded-full bg-gradient-to-br from-ivor-teal/30 to-ivor-amber/30 backdrop-blur-sm flex items-center justify-center animate-float">
                 <div className="absolute inset-0 rounded-full bg-black/20 backdrop-blur-sm"></div>
-                <User size={80} className="text-white/90 relative z-10" />
+                <img 
+                  src="/lovable-uploads/c4fc13e6-ca79-4b24-99b4-186bb5f7d82f.png" 
+                  alt="IVOR Assistant" 
+                  className="w-48 h-48 rounded-full relative z-10"
+                />
               </div>
             </div>
           </div>
