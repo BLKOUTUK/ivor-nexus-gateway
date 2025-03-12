@@ -1,69 +1,141 @@
-# Welcome to your Lovable project
 
-## Project info
+# IVOR: Integrating Voices of Resilience
 
-**URL**: https://lovable.dev/projects/3d953d45-4ce5-421b-9c15-f4001d110486
+![IVOR Logo](/lovable-uploads/b6d0c34e-5be3-45c0-a630-79db1ca97500.png)
 
-## How can I edit this code?
+IVOR (Integrating Voices of Resilience) is a community resource platform designed to connect members of the Black queer community with knowledge, support, and historical resources. Named after Ivor Cummings, a figure in Black queer history, this application serves as a digital guide and conversational interface to community wisdom.
 
-There are several ways of editing your application.
+## 🌟 Features
 
-**Use Lovable**
+- **AI-Powered Conversational Interface**: Chat with IVOR to discover resources, events, and community information
+- **Community Authentication**: Integration with Heartbeat.chat community IDs for user authentication
+- **Resource Library**: Curated collection of resources for the Black queer community
+- **Event Calendar**: Upcoming community events and gatherings
+- **Community Directory**: Connect with organizations and community members
+- **Mobile Responsive**: Fully optimized for both desktop and mobile experiences
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3d953d45-4ce5-421b-9c15-f4001d110486) and start prompting.
+## 🚀 Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js (v14 or higher)
+- npm or yarn
+- Supabase account (for database and authentication)
+- Heartbeat.chat community (for authentication integration)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
+1. Clone the repository:
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone <repository-url>
+cd ivor-app
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies:
+```sh
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+3. Configure environment variables:
+- Create a `.env` file based on `.env.example`
+- Add your Supabase URL and anon key
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+4. Start the development server:
+```sh
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+5. Visit `http://localhost:8080` to see the application running
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📱 Authentication Flow
 
-**Use GitHub Codespaces**
+IVOR uses a community-based authentication system that leverages existing Heartbeat.chat IDs:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. Users enter their Heartbeat ID on the authentication page
+2. The system verifies the ID through Supabase authentication (using Google OAuth as a placeholder)
+3. Upon successful verification, a user profile is created/updated in the database
+4. The user is granted access to the full platform features
 
-## What technologies are used for this project?
+> **Note**: In the development environment, any ID will work for testing purposes.
 
-This project is built with .
+## 💬 Chat System
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The IVOR chat system provides:
 
-## How can I deploy this project?
+- Real-time conversation with the IVOR assistant
+- Storage of conversation history in Supabase
+- Personalized responses based on user context
+- Resource recommendations based on conversation content
 
-Simply open [Lovable](https://lovable.dev/projects/3d953d45-4ce5-421b-9c15-f4001d110486) and click on Share -> Publish.
+## 🧰 Tech Stack
 
-## I want to use a custom domain - is that possible?
+- **Frontend**: React, TypeScript, Tailwind CSS, shadcn/ui
+- **State Management**: React Context API, TanStack Query
+- **Routing**: React Router
+- **Database & Auth**: Supabase
+- **Build Tools**: Vite
+- **Icons**: Lucide React
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+## 📁 Project Structure
+
+```
+ivor-app/
+├── public/            # Static assets
+├── src/
+│   ├── components/    # Reusable UI components
+│   │   ├── layout/    # Layout components (Sidebar, MobileNavigation)
+│   │   └── ui/        # UI components from shadcn/ui
+│   ├── contexts/      # React contexts (AuthContext)
+│   ├── hooks/         # Custom React hooks
+│   ├── integrations/  # External service integrations (Supabase)
+│   ├── lib/           # Utility functions and shared logic
+│   ├── pages/         # Page components
+│   └── utils/         # Helper functions
+└── ...config files
+```
+
+## 👨‍💻 Development
+
+### Key Concepts
+
+1. **Authentication**:
+   - Authentication state is managed through `AuthContext`
+   - User profiles are stored in the `profiles` table in Supabase
+   - Session management utilizes Supabase Auth
+
+2. **Chat System**:
+   - Conversations are stored in the `conversations` table
+   - Messages include both user inputs and system responses
+   - Each conversation is linked to the authenticated user
+
+3. **Styling**:
+   - The application uses Tailwind CSS for styling
+   - Custom glass-card and glass-button styles provide a unique visual identity
+   - Mobile-first approach with responsive design
+
+### Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Commit your changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature/my-feature`
+5. Submit a pull request
+
+## 🔮 Future Enhancements
+
+- Integration with AI services for more intelligent responses
+- Community content contribution system
+- Direct connection with support resources
+- Media sharing capabilities
+- Enhanced user profiles and community connections
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgements
+
+- Named in honor of Ivor Cummings, highlighting Black queer history
+- Built with [Lovable](https://lovable.dev)
+- Utilizes [Supabase](https://supabase.io) for backend services
+- Integrates with [Heartbeat.chat](https://heartbeat.chat) for community authentication
